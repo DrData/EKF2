@@ -90,22 +90,6 @@ enum SensorType
 	eRadar,
 };
 
-// Creates the requested KTSensor class (laser or radar)
-class KalmanFilterFactory
-{
-public:
-	KalmanFilterFactory(StateVector *pSV) 
-	{
-		_pSV = pSV;
-	};
-
-	KalmanFilter * KalmanFilterFactory::MakeKalmanFilter(SensorType type);
-
-private:
-	StateVector *_pSV;
-};
-
-
 // Laser Sensor Kalman Filter
 // Handles laser measurement related parameters
 class LaserKalmanFilter : public KalmanFilter
@@ -141,5 +125,19 @@ protected:
 
 };
 
+// Creates the requested KTSensor class (laser or radar)
+class KalmanFilterFactory
+{
+public:
+	KalmanFilterFactory(StateVector *pSV) 
+	{
+		_pSV = pSV;
+	};
+
+	KalmanFilter * MakeKalmanFilter(SensorType type);
+
+private:
+	StateVector *_pSV;
+};
 
 #endif 
